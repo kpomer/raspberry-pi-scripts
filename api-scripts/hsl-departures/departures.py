@@ -74,7 +74,8 @@ def get_hsl_departures(stop_ids):
                 destination = departure["headsign"]
 
                 # print(f"  {i+1}. Line {transit_number} to {destination} at {departure_time} - ({time_to_departure})") # Extended text length
-                print(f"{transit_number} to {destination} at {departure_time} - ({time_to_departure})") # Shortened text length
+                # print(f"{transit_number} to {destination} at {departure_time} - ({time_to_departure})") # Shortened text length
+                print(f"{transit_number} at {departure_time} - ({time_to_departure})") # Super-short text length
 
     except requests.exceptions.RequestException as e:
         # Check for specific 401 error and provide a more helpful message.
