@@ -45,7 +45,8 @@ def get_hsl_departures(stop_ids):
             vehicle_mode = s["vehicleMode"]
             departures = s["stoptimesWithoutPatterns"]
 
-            print(f"\nNext departures for {vehicle_mode} stop: {stop_name}:")
+            # print(f"\nNext departures for {vehicle_mode} stop: {stop_name}:") # Extended text length
+            print(f"\n{vehicle_mode}: {stop_name}:") # Shortened text length
 
             if not departures:
                 print("No upcoming departures found.")
@@ -72,7 +73,8 @@ def get_hsl_departures(stop_ids):
                 transit_number = departure["trip"]["route"]["shortName"]
                 destination = departure["headsign"]
 
-                print(f"  {i+1}. Line {transit_number} to {destination} at {departure_time} - ({time_to_departure})")
+                # print(f"  {i+1}. Line {transit_number} to {destination} at {departure_time} - ({time_to_departure})") # Extended text length
+                print(f"{transit_number} to {destination} at {departure_time} - ({time_to_departure})") # Shortened text length
 
     except requests.exceptions.RequestException as e:
         # Check for specific 401 error and provide a more helpful message.
