@@ -4,7 +4,7 @@ import sys
 
 def get_hsl_departures(stop_id):
 
-    return f"Returning departures for STOP_ID: {stop_id}!"
+    return f"Returning departures for STOP_ID: {stop_id}!\nStop1, Stop2, Stop3"
 
 
 # Check if an argument was provided.
