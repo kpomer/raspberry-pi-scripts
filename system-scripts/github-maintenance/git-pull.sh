@@ -2,8 +2,8 @@
 
 # Ensure we are inside a git repo
 if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-echo "Error: Not inside a git repository."
-exit 1
+    echo "Error: Not inside a git repository."
+    exit 1
 fi
 
 # cd to the root of the repo (so the script works no matter where it’s stored/run)
