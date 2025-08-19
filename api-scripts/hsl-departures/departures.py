@@ -46,7 +46,7 @@ def get_hsl_departures(stop_ids):
             departures = s["stoptimesWithoutPatterns"]
 
             # print(f"\nNext departures for {vehicle_mode} stop: {stop_name}:") # Extended text length
-            print(f"\n{vehicle_mode}: {stop_name}:") # Shortened text length
+            print(f"\n{vehicle_mode} {stop_name}:") # Shortened text length
 
             if not departures:
                 print("No upcoming departures found.")
@@ -68,7 +68,8 @@ def get_hsl_departures(stop_ids):
                     time_to_departure = "DEPARTED"
 
                 # Format the correctly calculated datetime object into a readable time string.
-                departure_time = departure_datetime.strftime('%H:%M:%S')
+                # departure_time = departure_datetime.strftime('%H:%M:%S') # Full timestamp H:M:S
+                departure_time = departure_datetime.strftime('%H:%M') # Shortened timestamp H:M
                 # Extract the transit line number and destination.
                 transit_number = departure["trip"]["route"]["shortName"]
                 destination = departure["headsign"]
