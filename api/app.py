@@ -1,10 +1,10 @@
-# transit_api/app.py
+# api/app.py
 from flask import Flask, request, jsonify
 
 #Import Blueprints
 from hello_world.helloWorld import helloWorld_bp
 from current_time.time import currentTime_bp
-from hsl_departures4.departures4 import hsl_departures_bp
+from hsl_departures.departures import hsl_departures_bp
 
 app = Flask(__name__)
 
