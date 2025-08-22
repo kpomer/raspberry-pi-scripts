@@ -37,8 +37,11 @@ def get_hsl_departures_api():
     return jsonify({"responseData": departures_result}), 200
 
 
-# Gather values from .env file stored in root folder
-load_dotenv()
+# Gather values from .env file stored in same directory
+
+# Construct the path to the .env file relative to the current script's location.
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+load_dotenv(dotenv_path=dotenv_path)
 API_KEY = os.getenv("API_KEY")
 API_ENDPOINT = os.getenv("API_ENDPOINT")
 
@@ -75,7 +78,7 @@ def retrieveFormattedDepartures(stop_ids):
             return "Error: Could not retrieve stop data. Please check the stop ID or API key."
 
         stop_data = data["data"]["stops"]
-        if not stop_data:
+        if not stop_data or stop_data == [None]:
             return "No stop data found for the provided stop_ids"
         
         for s in stop_data:
@@ -128,6 +131,8 @@ def retrieveFormattedDepartures(stop_ids):
         return "Error: The API response was not valid JSON."
     except KeyError as e:
         return f"Error: Missing key in API response data: {e}"
+    except Exception as e: # <-- Catchall for any other unexpected exceptions
+        return f"Error: An unexpected internal error occurred: {e}"
     
     return "\n".join(output_lines)
 
