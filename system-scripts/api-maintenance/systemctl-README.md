@@ -57,10 +57,10 @@ See scripts below to manage and edit the service:
   systemctl status
   ```
 
-- Shows the complete log history for your service
+- Shows the complete log history for your service. The `-r` flag tells it to return in reverse to see the most recent logs at the top, but it can be excluded to see it from oldest to newest
 
   ```bash
-  journalctl -u flask-api.service
+  journalctl -u flask-api.service -r
   ```
 
 - Follow logs in realtime (useful for debugging)
