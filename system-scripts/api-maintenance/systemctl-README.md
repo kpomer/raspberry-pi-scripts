@@ -6,7 +6,7 @@ See scripts below to manage and edit the service:
 
 ### Systemctl Commands
 
-- Reload Systemd Manager Config and Restart Service. Run this after any code or configuration changes
+- Reload Systemd Manager Config and Restart Service. Run this after any code or configuration changes by executing the `api-reload-restart.sh` script in this directory
 
   ```bash
   sudo systemctl daemon-reload
