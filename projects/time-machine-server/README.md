@@ -140,3 +140,11 @@ smbclient -L localhost -U timemachine
 #### After choosing to backup, you must enter the new timemachine username and password from the raspberry pi setup
 
 #### Start your backup!
+
+## Monitoring
+
+#### View the amount of time machine storage being used for each machine
+
+```bash
+sudo du -sh /mnt/timemachine/*
+```
