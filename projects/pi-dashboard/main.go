@@ -64,6 +64,9 @@ func getDiskUsage() [][]string {
 
 }
 
+// TODO Add functions for other metrics including Time Machine information and other connected drives or devices
+// It would be nice to have information about services running (ex. Tailscale, Gunicorn/Flask API service, Samba file sharing for time machine)
+
 
 // ---- Main Program ----
 func main() {
