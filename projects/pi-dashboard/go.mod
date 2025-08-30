@@ -1,6 +1,6 @@
 module github.com/kpomer/raspberry-pi-scripts/projects/pi-dashboard
 
-go 1.25.0
+go 1.25
 
 require github.com/gizak/termui/v3 v3.1.0
 
