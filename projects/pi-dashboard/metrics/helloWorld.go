@@ -13,8 +13,8 @@ func GetHelloWorld(sampleData bool) string {
 		// return sample data
 		returnVal = getSampleHelloWorld()
 	} else {
-		// cmd: echo Hello World - REAL
-		cmdOutput, err := exec.Command("echo", "Hello World - REAL").Output()
+		// cmd: echo Hello World - LIVE
+		cmdOutput, err := exec.Command("echo", "Hello World - LIVE").Output()
         if err != nil {
             fmt.Println("Error running command:", err)
 			returnVal = ""
