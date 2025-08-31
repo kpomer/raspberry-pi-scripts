@@ -2,7 +2,7 @@ package metrics
 
 import (
 	"fmt"
-	"math/rand/v2"
+	"math/rand"
 	"os/exec"
 	"strconv"
 	"strings"
