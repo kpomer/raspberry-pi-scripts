@@ -37,6 +37,12 @@ func main() {
 	k.SetRect(5, 35, 40, 40)
 	k.BorderStyle.Bg = ui.ColorRed
 
+	// Hello World Paragraph
+	p0 := widgets.NewParagraph()
+	p0.Text = metrics.GetHelloWorld(*sampleData)
+	p0.SetRect(100, 12, 125, 17)
+	p0.Border = false
+
 	// CPU Temp
 	p2 := widgets.NewPlot()
 	p2.Title = "CPU Temperature ('C)"
@@ -56,7 +62,7 @@ func main() {
 	table1.SetRect(0, 0, 100, 10)
 
 
-	ui.Render(k, p2, table1)
+	ui.Render(k, p2, table1, p0)
 
 	uiEvents := ui.PollEvents()
 	ticker := time.NewTicker(time.Second).C
@@ -74,7 +80,7 @@ func main() {
 			if len(p2.Data[0]) > x{
 				p2.Data[0] = p2.Data[0][len(p2.Data[0]) - x:]
 			}
-			ui.Render(k, p2, table1)
+			ui.Render(k, p2, table1, p0)
 		}
 }
 
