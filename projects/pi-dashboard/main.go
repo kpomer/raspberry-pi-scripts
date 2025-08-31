@@ -7,6 +7,7 @@ import (
 
 	//"os/exec"
 	//"runtime"
+
 	ui "github.com/gizak/termui/v3"
 	"github.com/gizak/termui/v3/widgets"
 	"github.com/kpomer/raspberry-pi-scripts/projects/pi-dashboard/metrics"
@@ -23,7 +24,6 @@ func main() {
 	flag.Parse()
 
 
-	
 	// Create and Render Widgets
 	if err := ui.Init(); err != nil {
 		log.Fatalf("failed to initialize termui: %v", err)
@@ -34,13 +34,11 @@ func main() {
 	k := widgets.NewParagraph()
 	k.Title = "Key Input"
 	k.Text = "Press [q](fg:red) or [CTRL + C](fg:red) to QUIT"
-	k.SetRect(5, 35, 40, 40)
 	k.BorderStyle.Bg = ui.ColorRed
 
 	// Hello World Paragraph
 	p0 := widgets.NewParagraph()
 	p0.Text = metrics.GetHelloWorld(*sampleData)
-	p0.SetRect(100, 12, 125, 17)
 	p0.Border = false
 
 	// CPU Temp
@@ -49,7 +47,6 @@ func main() {
 	p2.Marker = widgets.MarkerDot
 	p2.Data = make([][]float64, 1)
 	p2.Data[0] = []float64{metrics.GetCPUTemp(*sampleData)}
-	p2.SetRect(0, 12, 50, 30)
 	p2.AxesColor = ui.ColorWhite
 	p2.LineColors[0] = ui.ColorCyan
 	p2.PlotType = widgets.ScatterPlot
@@ -59,10 +56,24 @@ func main() {
 	table1.Title = "Disk Usage"
 	table1.Rows = metrics.GetDiskUsage(*sampleData)
 	table1.TextStyle = ui.NewStyle(ui.ColorWhite)
-	table1.SetRect(0, 0, 100, 10)
 
 
-	ui.Render(k, p2, table1, p0)
+	// Format Grid
+	grid := ui.NewGrid()
+	grid.Set(
+		ui.NewRow(1.0/3,
+			ui.NewCol(1.0/4,
+				ui.NewRow(1.0/3, p0),
+				ui.NewRow(2.0/3, k),
+			),
+			ui.NewCol(3.0/4, table1),
+		),
+		ui.NewRow(1.0/3,
+			ui.NewCol(1.0/4, p2),
+			ui.NewCol(1.0/2, p0),
+		),
+	)
+	renderGrid(grid)
 
 	uiEvents := ui.PollEvents()
 	ticker := time.NewTicker(time.Second).C
@@ -80,8 +91,16 @@ func main() {
 			if len(p2.Data[0]) > x{
 				p2.Data[0] = p2.Data[0][len(p2.Data[0]) - x:]
 			}
-			ui.Render(k, p2, table1, p0)
+			renderGrid(grid)
 		}
+	}
+
 }
 
+func renderGrid(grid *ui.Grid) {
+	// Resize and re-render based on terminal window
+	termWidth, termHeight := ui.TerminalDimensions()
+	grid.SetRect(0, 0, termWidth, termHeight)
+
+	ui.Render(grid)
 }
