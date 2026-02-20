@@ -57,6 +57,11 @@ func main() {
 	table1.Rows = metrics.GetDiskUsage(*sampleData)
 	table1.TextStyle = ui.NewStyle(ui.ColorWhite)
 
+	// Uptime Data Paragraph
+	p1 := widgets.NewParagraph()
+	p1.Text = metrics.GetUptime(*sampleData)
+	p1.Border = false
+
 
 	// Format Grid
 	grid := ui.NewGrid()
@@ -70,7 +75,7 @@ func main() {
 		),
 		ui.NewRow(1.0/3,
 			ui.NewCol(1.0/4, p2),
-			ui.NewCol(1.0/2, p0),
+			ui.NewCol(1.0/2, p1),
 		),
 	)
 	renderGrid(grid)
