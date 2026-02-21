@@ -14,8 +14,12 @@ app.register_blueprint(hsl_departures_bp, url_prefix='/hsl_departures')
 
 @app.route('/')
 def index():
-    """Simple root route to show the API is running."""
-    return jsonify({"message": "Welcome to your Raspberry Pi API!"})
+    """Simple root health check to show the service is running."""
+    return jsonify({
+        "status": "online",
+        "server": "pomerpi01",
+        "availableServices": ["/time", "/hello", "/hsl_departures"]
+    }), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000) 
