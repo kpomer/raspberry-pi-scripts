@@ -1,3 +1,7 @@
+# payment_ledger files
+sample_payment_ledger_request.json
+payment_ledger.db
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
