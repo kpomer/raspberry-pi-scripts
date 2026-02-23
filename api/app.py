@@ -5,12 +5,14 @@ from flask import Flask, request, jsonify
 from hello_world.helloWorld import helloWorld_bp
 from current_time.time import currentTime_bp
 from hsl_departures.departures import hsl_departures_bp
+from payment_ledger.log_transactions import payment_ledger_bp
 
 app = Flask(__name__)
 
 app.register_blueprint(currentTime_bp, url_prefix='/time')
 app.register_blueprint(helloWorld_bp, url_prefix='/hello')
 app.register_blueprint(hsl_departures_bp, url_prefix='/hsl_departures')
+app.register_blueprint(payment_ledger_bp, url_prefix='/log_payments')
 
 @app.route('/')
 def index():
@@ -18,7 +20,7 @@ def index():
     return jsonify({
         "status": "online",
         "server": "pomerpi01",
-        "availableServices": ["/time", "/hello", "/hsl_departures"]
+        "availableServices": ["/time", "/hello", "/hsl_departures", "/log_payments"]
     }), 200
 
 if __name__ == '__main__':
