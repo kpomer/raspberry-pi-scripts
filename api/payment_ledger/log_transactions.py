@@ -79,11 +79,13 @@ def initialize_db(db_path):
 @payment_ledger_bp.route('/', methods=['POST'])
 def get_payment_ledger_api():
     # ----- Root function called from API ---#
-    requestJson = request.get_json()
-    
-    result = processPaymentLog(requestJson)
-    status_code = 201 if result['success'] else 500
-    return jsonify(result), status_code
+    try:
+        requestJson = request.get_json()
+        result = processPaymentLog(requestJson)
+        status_code = 201 if result['success'] else 500
+        return jsonify(result), status_code
+    except Exception as e:
+        return jsonify({"success": False, "data": None, "error": f"Internal Error: {str(e)}"}), 500
 
 
 if __name__ == "__main__":
